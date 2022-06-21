@@ -15,7 +15,7 @@ const Home: NextPage = () => {
     isDone: false,
   });
 
-  const [taskList, setTaskList] = useState([
+  const [taskList, setTaskList] = useState<Task[]>([
     {
       id: '1',
       desc: 'Test Task 1',

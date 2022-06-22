@@ -10,33 +10,17 @@ const Home: NextPage = () => {
   }
 
   const [task, setTask] = useState<Task>({
-    id: uuidv4(),
+    id: '',
     desc: '',
     isDone: false,
   });
 
-  const [taskList, setTaskList] = useState<Task[]>([
-    {
-      id: '1',
-      desc: 'Test Task 1',
-      isDone: false,
-    },
-    {
-      id: '2',
-      desc: 'Test Task 2',
-      isDone: true,
-    },
-    {
-      id: '3',
-      desc: 'Test Task 3',
-      isDone: false,
-    },
-  ]);
+  const [taskList, setTaskList] = useState<Task[]>([]);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     e.currentTarget.value &&
       setTask({
-        id: '001',
+        id: '',
         desc: e.currentTarget.value,
         isDone: false,
       });
@@ -44,40 +28,74 @@ const Home: NextPage = () => {
 
   function handleAdd() {
     const newTask: Task = {
-      id: task.id,
+      id: uuidv4(),
       desc: task.desc,
       isDone: task.isDone,
     };
+    setTaskList((prevList) => [newTask, ...prevList]);
+    setTask({
+      id: '',
+      desc: '',
+      isDone: false,
+    });
   }
 
-  const taskClick = (id: string) => {
-    const newTasks = [...taskList];
-    newTasks.map((task) => {
+  function handleToggle(id: string) {
+    const newTaskList = taskList.map((task) => {
       if (task.id === id) {
-        setTask({
+        const newTask = {
           ...task,
           isDone: !task.isDone,
-        });
+        };
+        return newTask;
       }
+      return task;
     });
-  };
+    setTaskList(newTaskList);
+  }
+
+  function handleDelete() {
+    const newTaskList = taskList.filter((task) => !task.isDone);
+    setTaskList(newTaskList);
+  }
 
   const tasks = taskList.map(({ id, desc, isDone }) => {
     const itemClass = isDone
-      ? 'bg-red-300 m-5 p-2 text-center'
-      : 'bg-green-300 m-5 p-2 text-center';
+      ? 'bg-red-300 rounded-lg m-5 p-2 text-center'
+      : 'bg-green-300 rounded-lg m-5 p-2 text-center';
     return (
-      <li key={id} className={itemClass}>
+      <li onClick={() => handleToggle(id)} key={id} className={itemClass}>
         {desc}: {isDone.toString()}
       </li>
     );
   });
 
   return (
-    <div className='Main max-w-md m-auto'>
-      <h1 className='text-2xl text-center'>To Do List Application</h1>
-      <input type='text' placeholder='Add a task' onChange={handleChange} />
-      <button>Add</button>
+    <div className='Main max-w-lg m-auto'>
+      <h1 className='text-2xl font-semibold text-center mb-5'>
+        To Do List App
+      </h1>
+      <div className='input-area flex items-center justify-between'>
+        <input
+          type='text'
+          className='border-0 rounded-lg border-black shadow-md p-1'
+          placeholder='Enter task'
+          onChange={handleChange}
+          value={task.desc}
+        />
+        <button
+          className='border-2 rounded-lg p-1 bg-stone-300'
+          onClick={handleAdd}
+        >
+          Add new task
+        </button>
+        <button
+          className='border-2 rounded-lg p-1 bg-stone-300'
+          onClick={handleDelete}
+        >
+          Delete Completed
+        </button>
+      </div>
       <ul>{tasks}</ul>
     </div>
   );

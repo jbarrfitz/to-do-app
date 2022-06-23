@@ -1,6 +1,11 @@
-import type { NextPage } from 'next';
-import { useState } from 'react';
-import styled from 'styled-components'
+/* implement styled components on the orig to-do list with shenanigans
+   stretch goal: pull up mui and cross-reference with this, see how it
+   looks under the hood (look at source files, etc.), specifically for the 
+   theme provider */
+
+import type { NextPage } from "next";
+import { useState } from "react";
+import styled from "styled-components";
 
 const Card = styled.div`
   padding: 1.5rem;
@@ -16,11 +21,10 @@ const Card = styled.div`
     color: #0070f3;
     border-color: #0070f3;
   }
-`
-
+`;
 
 const Home: NextPage = () => {
-    return <Card>Hello World! This is a styled-component</Card>;
+  return <Card>Hello World! This is a styled-component</Card>;
 };
 
 export default Home;

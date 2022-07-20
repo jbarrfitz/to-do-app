@@ -1,6 +1,6 @@
-import type { NextPage } from "next";
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import type { NextPage } from 'next';
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 interface Task {
   id: string;
   desc: string;
@@ -9,8 +9,8 @@ interface Task {
 
 const Home: NextPage = () => {
   const [task, setTask] = useState<Task>({
-    id: "",
-    desc: "",
+    id: '',
+    desc: '',
     isDone: false,
   });
 
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     e.currentTarget.value &&
       setTask({
-        id: "",
+        id: '',
         desc: e.currentTarget.value,
         isDone: false,
       });
@@ -33,8 +33,8 @@ const Home: NextPage = () => {
     };
     setTaskList([newTask, ...taskList]);
     setTask({
-      id: "",
-      desc: "",
+      id: '',
+      desc: '',
       isDone: false,
     });
   }
@@ -60,36 +60,36 @@ const Home: NextPage = () => {
 
   const tasks = taskList.map(({ id, desc, isDone }) => {
     const itemClass = isDone
-      ? "bg-red-300 rounded-lg m-5 p-2 text-center"
-      : "bg-green-300 rounded-lg m-5 p-2 text-center";
+      ? 'bg-red-300 rounded-lg m-5 p-2 text-center'
+      : 'bg-green-300 rounded-lg m-5 p-2 text-center';
     return (
       <li onClick={() => handleToggle(id)} key={id} className={itemClass}>
-        {desc}: {isDone.toString()}
+        {desc}
       </li>
     );
   });
 
   return (
-    <div className="Main max-w-lg m-auto">
-      <h1 className="text-2xl font-semibold text-center mb-5">
+    <div className='Main max-w-lg m-auto'>
+      <h1 className='text-2xl font-semibold text-center mb-5'>
         To Do List App
       </h1>
-      <div className="input-area flex items-center justify-between">
+      <div className='input-area flex items-center justify-between'>
         <input
-          type="text"
-          className="border-0 rounded-lg border-black shadow-md p-1"
-          placeholder="Enter task"
+          type='text'
+          className='border-0 rounded-lg border-black shadow-md p-1'
+          placeholder='Enter task'
           onChange={handleChange}
           value={task.desc}
         />
         <button
-          className="border-2 rounded-lg p-1 bg-stone-300"
+          className='border-2 rounded-lg p-1 bg-stone-300'
           onClick={handleAdd}
         >
           Add new task
         </button>
         <button
-          className="border-2 rounded-lg p-1 bg-stone-300"
+          className='border-2 rounded-lg p-1 bg-stone-300'
           onClick={handleDelete}
         >
           Delete Completed

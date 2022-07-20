@@ -1,19 +1,3 @@
-/* implement styled components on the orig to-do list with shenanigans
-   stretch goal: pull up mui and cross-reference with this, see how it
-   looks under the hood (look at source files, etc.), specifically for the 
-   theme provider */
-
-/*  For Keller:
-    OK, I concede that styled-components can be less gross than other options
-    but still maintain that all css is gross.
-
-    Well, at least I learned a bit about themes and theme providers today,
-    which is more than I could have said yesterday. :-) Apparently, wrapping
-    the code in a theme allows components to use those themes, regardless of
-    how deeply nested they are. It appears to be a similar process in both styled-
-    components and mui.
-*/
-
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
